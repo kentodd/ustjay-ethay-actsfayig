@@ -16,10 +16,20 @@ def get_fact():
 
     return facts[0].getText()
 
+def get_pig_link(fact):
+    # get the fact
+    # send the fact to the pig
+    # capture the pig link
+    # return the pig link
+    response = requests.post('https://hidden-journey-62459.herokuapp.com/piglatinize/', data=dict(input_text=fact))
+    return response.url
 
 @app.route('/')
 def home():
-    return "FILL ME!"
+    fact = get_fact()
+    pig_fact = get_pig_link(fact)
+    return Response(response=pig_fact, mimetype="text/html")
+
 
 
 if __name__ == "__main__":
